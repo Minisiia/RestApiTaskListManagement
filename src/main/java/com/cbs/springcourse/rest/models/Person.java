@@ -28,13 +28,13 @@ public class Person {
     @Email
     @NotEmpty(message = "Email should not be empty")
     private String email;
-   /* @Column(name = "created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     @Column(name = "created_who")
     @NotEmpty(message = "Created_who should not be empty")
-    private String createdWho;*/
+    private String createdWho;
 
     public Person() {
 
@@ -45,7 +45,7 @@ public class Person {
         this.age = age;
     }
 
-   /* public LocalDateTime getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
@@ -68,7 +68,6 @@ public class Person {
     public void setCreatedWho(String createdWho) {
         this.createdWho = createdWho;
     }
-*/
     public int getId() {
         return id;
     }

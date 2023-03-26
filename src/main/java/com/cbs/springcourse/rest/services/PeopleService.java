@@ -32,13 +32,13 @@ public class PeopleService {
     }
 
     public void save(Person person) {
-       // enrichPerson(person);
+        enrichPerson(person);
         peopleRepository.save(person);
     }
 
-/*    private void enrichPerson(Person person) {
+    private void enrichPerson(Person person) {
         person.setCreatedAt(LocalDateTime.now());
         person.setUpdatedAt(LocalDateTime.now());
         person.setCreatedWho("ADMIN");
-    }*/
+    }
 }
