@@ -1,10 +1,10 @@
-package com.cbs.springcourse.rest.util;
+package genshin_tasks.util;
 
-public class PersonErrorResponse {
+public class TaskErrorResponse {
     private String message;
     private long timestamp;
 
-    public PersonErrorResponse(String message, long timestamp) {
+    public TaskErrorResponse(String message, long timestamp) {
         this.message = message;
         this.timestamp = timestamp;
     }
