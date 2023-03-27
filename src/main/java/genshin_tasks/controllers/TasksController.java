@@ -47,18 +47,7 @@ public class TasksController {
     @PostMapping
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid TaskDTO taskDTO,
                                              BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMessage = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMessage.append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
-                        .append(";");
-            }
-            throw new TaskNotCreatedException(errorMessage.toString());
-
-        }
+        checkBindingResult(bindingResult);
         tasksService.save(convertToTask(taskDTO));
         return ResponseEntity.ok(HttpStatus.OK);
     }
@@ -67,18 +56,7 @@ public class TasksController {
     public ResponseEntity<HttpStatus> updateTask(@PathVariable("id") int id,
                                                  @RequestBody @Valid TaskDTO taskDTO,
                                                  BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMessage = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMessage.append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
-                        .append(";");
-            }
-            throw new TaskNotCreatedException(errorMessage.toString());
-
-        }
+        checkBindingResult(bindingResult);
         tasksService.update(id, convertToTask(taskDTO));
         return ResponseEntity.ok(HttpStatus.OK);
     }
@@ -112,5 +90,19 @@ public class TasksController {
                 System.currentTimeMillis()
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    private void checkBindingResult(BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                errorMessage.append(error.getField())
+                        .append(" - ")
+                        .append(error.getDefaultMessage())
+                        .append(";");
+            }
+            throw new TaskNotCreatedException(errorMessage.toString());
+        }
     }
 }
